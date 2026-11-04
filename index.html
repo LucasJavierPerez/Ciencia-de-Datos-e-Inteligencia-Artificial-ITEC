@@ -115,6 +115,8 @@ td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-
 .src.s { border: 1px solid var(--line); color: var(--muted); }
 .src.o { border: 1px dashed var(--line); color: var(--muted); }
 .src.d { background: var(--warn-soft); border: 1px solid var(--warn); color: var(--fg); }
+.units li > * { grid-column: 2; min-width: 0; }
+.units li::before { grid-column: 1; grid-row: 1 / span 2; }
 .units p.dep { margin-top: 2px; }
 .src.a { background: var(--c1-soft); border: 1px solid var(--c1); color: var(--fg); }
 .units li.is-upd::before { color: var(--c1); border-color: var(--c1); }
