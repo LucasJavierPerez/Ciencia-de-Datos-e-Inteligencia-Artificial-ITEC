@@ -127,6 +127,7 @@ details { border-top: 1px solid var(--line); padding-top: 14px; }
 summary { cursor: pointer; font-weight: 600; }
 summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 details p { color: var(--muted); max-width: 75ch; }
+.topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; }
 /* Teacher */
 .teacher { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 8px; }
 .teacher .who { display: grid; min-width: 0; flex: 1; }
@@ -160,7 +161,7 @@ details p { color: var(--muted); max-width: 75ch; }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Técnico Superior en Ciencia de Datos e IA · RM 213/22</div>
+    <div class="topbar"><div class="eyebrow">Técnico Superior en Ciencia de Datos e IA · RM 213/22</div><button class="btn" type="button" id="theme-toggle">Modo claro</button></div>
     <h1>Segundo año, <span>materia por materia</span></h1>
     <p class="lede">Las 9 materias de 2º año con sus contenidos oficiales, unidades, tecnologías y con qué se conectan. Tocá una materia en la grilla para ver su ficha. Lo marcado como <span class="src a">Actualización</span> no está en el programa oficial (2022): son temas agregados para ponerlo al día. Lo marcado como <span class="src d">En desuso</span> sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.</p>
     <div class="stats">
@@ -314,6 +315,23 @@ const S = [
   practice:["Kata TDD (FizzBuzz, calculadora de strings) con pytest.","Testear las funciones de limpieza del proyecto de PP I.","Configurar GitHub Actions para correr tests y cobertura en cada push.","Escribir un plan de pruebas y 3 reportes de bug formales."],
   official:"Importancia del testeo. Técnicas. Herramientas. TDD, CI. Programación UnitTest. Técnicas de caja blanca. Desarrollo de casos de pruebas unitarias. Manejo de excepciones. Herramientas de automatización. Pruebas de integración. Seguridad de los sistemas de información. Documento de Plan de Pruebas, casos de pruebas, especificación de diseño de casos, logs de errores, reportes de errores (bugs), evidencias de pruebas, reportes emitidos por herramientas de pruebas."}
 ];
+// Theme toggle: explicit choice stored per viewer; default follows the system
+(function(){
+  const root = document.documentElement, btn = document.getElementById("theme-toggle");
+  const sysDark = () => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let saved = null;
+  try { saved = localStorage.getItem("theme"); } catch {}
+  if (saved === "light" || saved === "dark") root.dataset.theme = saved;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : sysDark();
+  const label = () => { btn.textContent = isDark() ? "Modo claro" : "Modo oscuro"; };
+  btn.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch {}
+    label();
+  });
+  label();
+})();
 const REG = {anual:"Anual", c1:"1º cuatrimestre", c2:"2º cuatrimestre"};
 const RC = {anual:"var(--anual)", c1:"var(--c1)", c2:"var(--c2)"};
 const SRC = {e:["Programa","e"], s:["Sugerida","s"], o:["Opcional","o"], a:["Actualización","a"], d:["En desuso","d"]};
