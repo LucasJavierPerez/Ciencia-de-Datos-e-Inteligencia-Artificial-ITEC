@@ -21,6 +21,8 @@
   --c2: #4f7d3a;
   --c1-soft: #dcefef;
   --c2-soft: #e3eedb;
+  --warn: #a2482c;
+  --warn-soft: #f6e3dc;
   --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -29,13 +31,13 @@
   :root:not([data-theme="light"]) {
     --bg: #12161d; --surface: #1a2029; --fg: #e6e9ef; --muted: #9aa3b4; --line: #2b3340;
     --accent: #e0b24a; --accent-soft: #3a3020; --anual: #e0b24a; --c1: #5cbcc4; --c2: #8cc06e;
-    --c1-soft: #1c3335; --c2-soft: #233021; color-scheme: dark;
+    --c1-soft: #1c3335; --c2-soft: #233021; --warn: #e08a6c; --warn-soft: #3a241d; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #12161d; --surface: #1a2029; --fg: #e6e9ef; --muted: #9aa3b4; --line: #2b3340;
   --accent: #e0b24a; --accent-soft: #3a3020; --anual: #e0b24a; --c1: #5cbcc4; --c2: #8cc06e;
-  --c1-soft: #1c3335; --c2-soft: #233021; color-scheme: dark;
+  --c1-soft: #1c3335; --c2-soft: #233021; --warn: #e08a6c; --warn-soft: #3a241d; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
@@ -112,6 +114,8 @@ td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-
 .src.e { background: var(--accent-soft); color: var(--fg); border: 1px solid var(--accent); }
 .src.s { border: 1px solid var(--line); color: var(--muted); }
 .src.o { border: 1px dashed var(--line); color: var(--muted); }
+.src.d { background: var(--warn-soft); border: 1px solid var(--warn); color: var(--fg); }
+.units p.dep { margin-top: 2px; }
 .src.a { background: var(--c1-soft); border: 1px solid var(--c1); color: var(--fg); }
 .units li.is-upd::before { color: var(--c1); border-color: var(--c1); }
 ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
@@ -156,7 +160,7 @@ details p { color: var(--muted); max-width: 75ch; }
   <header>
     <div class="eyebrow">Técnico Superior en Ciencia de Datos e IA · RM 213/22</div>
     <h1>Segundo año, <span>materia por materia</span></h1>
-    <p class="lede">Las 9 materias de 2º año con sus contenidos oficiales, unidades, tecnologías y con qué se conectan. Tocá una materia en la grilla para ver su ficha. Lo marcado como <span class="src a">Actualización</span> no está en el programa oficial (2022): son temas agregados para ponerlo al día.</p>
+    <p class="lede">Las 9 materias de 2º año con sus contenidos oficiales, unidades, tecnologías y con qué se conectan. Tocá una materia en la grilla para ver su ficha. Lo marcado como <span class="src a">Actualización</span> no está en el programa oficial (2022): son temas agregados para ponerlo al día. Lo marcado como <span class="src d">En desuso</span> sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.</p>
     <div class="stats">
       <div class="stat"><b>640</b><small>horas reloj</small></div>
       <div class="stat"><b>9</b><small>espacios curriculares</small></div>
@@ -186,7 +190,7 @@ const S = [
  {id:"ciencia-de-datos", n:10, name:"Ciencia de Datos", reg:"anual", campo:"Formación Específica", hr:107, hs:5, ha:160, corr:"Análisis Matemático (6), Álgebra (7)",
   about:"La materia de negocio de la carrera. No se centra en programar modelos sino en para qué se usan los datos en una organización: ciencia de datos frente a la gestión tradicional y la Business Intelligence, el ciclo de un proyecto con un cliente real y el marco legal de privacidad y licencias.",
   units:[["Información y organizaciones","Dato, información, conocimiento. Procesos de las organizaciones. Gestión tradicional: OLTP, reportes, ERP/CRM."],
-   ["Business Intelligence vs. análisis predictivo","Analítica descriptiva, predictiva y prescriptiva. Para qué le sirven un data warehouse y OLAP al negocio (lo técnico se ve en Procesamiento de Datos). KPIs. Casos: churn, scoring, demanda, recomendación."],
+   ["Business Intelligence vs. análisis predictivo","Analítica descriptiva, predictiva y prescriptiva. Para qué le sirven un data warehouse y OLAP al negocio (lo técnico se ve en Procesamiento de Datos). KPIs. Casos: churn, scoring, demanda, recomendación.",0,"Cubos OLAP tradicionales (MOLAP, SSAS): los warehouses columnares consultan directo sin precalcular cubos. Alcanza con entender el concepto."],
    ["Tableros de control y visualización","Tipos de dashboards, ventajas y desventajas. Diseño de KPIs. La visualización como ahorro de tiempo."],
    ["Ciclo de vida de un proyecto de datos","CRISP-DM, TDSP, OSEMN. Relevamiento de requerimientos, alcance, negociación y criterios de éxito. Roles del equipo."],
    ["Impacto estratégico","Autonomía tecnológica, desarrollo económico y competitividad. Casos de agro, fintech, salud y retail."],
@@ -210,11 +214,11 @@ const S = [
   official:"Relato de un proceso de forma oral o escrita. Profundización del vocabulario técnico. Estructuras gramaticales, lexicales y funcionales avanzadas para ser empleadas en intercambios comunicativos orales y escritos en un nivel intermedio avanzado. Comprensión de informes relacionados al campo de estudio. Comunicación efectiva. Hacer sugerencias, dar y pedir consejo y realizar aportes en la lengua por medio de e-mails, videollamadas, foros, de manera fluida."},
  {id:"estadisticas", n:12, name:"Estadísticas y Exploración de Datos", reg:"anual", campo:"Formación Específica", hr:107, hs:5, ha:160, corr:"Lógica (5), Análisis Matemático (6), Álgebra (7)",
   about:"La base matemática de todo el 3º año. Va de la estadística descriptiva a la probabilidad y las distribuciones, y llega a inferencia, regresión y ANOVA. Es la materia más importante del año para el perfil: sin ella, un modelo de machine learning es una caja negra.",
-  units:[["Fundamentos y estadística descriptiva","Población, muestra, tipos de variables. Tablas de frecuencia, datos agrupados. Histograma, boxplot."],
+  units:[["Fundamentos y estadística descriptiva","Población, muestra, tipos de variables. Tablas de frecuencia, datos agrupados. Histograma, boxplot.",0,"Diagrama de tallo y hoja: técnica de la época del cálculo a mano; hoy se usa histograma o boxplot."],
    ["Medidas descriptivas y EDA","Media, mediana, cuartiles; varianza, desvío, IQR; asimetría. Outliers. Análisis exploratorio completo."],
    ["Probabilidad","Espacio muestral, axiomas, combinatoria. Probabilidad condicional, independencia, Teorema de Bayes."],
    ["Variables aleatorias discretas","Esperanza y varianza. Bernoulli, Binomial, Pascal, Geométrica, Poisson. Modelos de fenómenos reales."],
-   ["Distribuciones continuas y fiabilidad","Uniforme, Exponencial, Normal. Tiempo hasta la falla. Suma de variables, Teorema Central del Límite, aproximaciones."],
+   ["Distribuciones continuas y fiabilidad","Uniforme, Exponencial, Normal. Tiempo hasta la falla. Suma de variables, Teorema Central del Límite, aproximaciones.",0,"Aproximación normal a la binomial y Poisson para calcular a mano: hoy el software da la probabilidad exacta. Sirve para entender el TCL, no para calcular."],
    ["Inferencia estadística","Intervalos de confianza, pruebas de hipótesis, p-valor, tests t, z y chi². No paramétricos: Mann-Whitney, Wilcoxon, Kruskal-Wallis."],
    ["Correlación y regresión","Pearson y Spearman. Regresión lineal simple, R², residuos. Regresión múltiple y modelos econométricos."],
    ["ANOVA y control estadístico","Análisis de varianza de un factor. Gráficos de control X̄, R y p."],
@@ -243,12 +247,12 @@ const S = [
   units:[["Lenguajes para datos","Python, R, SQL, Julia, Scala y cuándo usar cada uno. Archivos CSV, JSON, Excel, Parquet. SQL analítico con window functions."],
    ["Entornos y herramientas","Jupyter, Colab, VS Code, RStudio. Entornos virtuales. Git para proyectos de datos."],
    ["Manipulación y limpieza","pandas: groupby, merge, pivot. Nulos, duplicados, fechas, texto, outliers. Encoding y feature engineering. ETL/ELT."],
-   ["Big Data","Las V del Big Data. Hadoop y MapReduce como contexto histórico. Apache Spark (PySpark). Polars, DuckDB, Dask para datos medianos."],
+   ["Big Data","Las V del Big Data. Apache Spark (PySpark). Polars, DuckDB, Dask para datos medianos.",0,"Hadoop y MapReduce: reemplazados por Spark y los warehouses en la nube. Verlos como historia, no como herramienta a aprender."],
    ["Arquitecturas de datos analíticos","OLTP vs. OLAP. Data warehouse: Kimball e Inmon, hechos y dimensiones, modelo estrella y copo de nieve, data marts. Data lake y schema-on-read. Lakehouse con Delta Lake o Iceberg, arquitectura medallion. ETL vs. ELT con dbt, orquestación con Airflow. Warehouses en la nube.",1],
    ["Visualización","Percepción, elección del gráfico, color, accesibilidad. Múltiples variables: scatter matrix, heatmaps, facetas."],
    ["Storytelling y reportes","Contexto, conflicto, resolución. Un mensaje por gráfico. Presentar a audiencias no técnicas."],
    ["Calidad, gobierno y reproducibilidad","Calidad de datos, linaje, catálogo, data contracts. Entornos reproducibles con uv y Docker. Notebooks versionados.",1]],
-  tech:[["Python","Lenguaje principal","s"],["R","Comparación de lenguajes","s"],["SQL (PostgreSQL / SQLite)","Consulta de datos","s"],["Jupyter / Colab / VS Code","Entornos","s"],["pandas, NumPy","Manipulación","s"],["Polars / DuckDB","Datos medianos rápidos","s"],["Apache Spark","Big Data","s"],["Hadoop","Contexto histórico","o"],["matplotlib, seaborn, plotly","Visualización","s"],["Power BI / Tableau / Looker Studio","Dashboards y reportes","s"],["Streamlit","Apps de datos","o"],["Git + GitHub","Versionado","s"],["dbt","Transformaciones en el warehouse","a"],["Apache Airflow","Orquestación de pipelines","a"],["Delta Lake / Apache Iceberg","Lakehouse","a"],["BigQuery / Snowflake","Warehouse en la nube","a"],["Docker, uv","Reproducibilidad","a"]],
+  tech:[["Python","Lenguaje principal","s"],["R","Comparación de lenguajes","s"],["SQL (PostgreSQL / SQLite)","Consulta de datos","s"],["Jupyter / Colab / VS Code","Entornos","s"],["pandas, NumPy","Manipulación","s"],["Polars / DuckDB","Datos medianos rápidos","s"],["Apache Spark","Big Data","s"],["Hadoop","Reemplazado por Spark y la nube","d"],["matplotlib, seaborn, plotly","Visualización","s"],["Power BI / Tableau / Looker Studio","Dashboards y reportes","s"],["Streamlit","Apps de datos","o"],["Git + GitHub","Versionado","s"],["dbt","Transformaciones en el warehouse","a"],["Apache Airflow","Orquestación de pipelines","a"],["Delta Lake / Apache Iceberg","Lakehouse","a"],["BigQuery / Snowflake","Warehouse en la nube","a"],["Docker, uv","Reproducibilidad","a"]],
   from:"Programación I, Sistemas de Comunicación, Base de Datos.", cross:"Ciencia de Datos, Estadísticas.", to:"Testeo de Software (correlativa), Práctica Profesionalizante I, Minería de Datos.",
   practice:["Pipeline completo: CSV crudo, limpieza con pandas, Parquet, dashboard.","Mismo análisis con pandas y con DuckDB o PySpark; comparar tiempos.","Presentar un hallazgo en 5 slides con storytelling."],
   official:"Lenguajes de programación para el procesamiento y análisis de datos. Ejemplos más utilizados en la actualidad. Diferentes usos según el tipo de proyecto/negocio. Herramientas de software para Ciencia de Datos. Comparación y aplicaciones de diferentes entornos de software. Uso adecuado según los requerimientos del proyecto. La tecnología de grandes datos en la actualidad. Concepto de grandes volúmenes de datos. Diversas conceptualizaciones: macrodatos, datos masivos, inteligencia de datos o datos a gran escala. Herramientas de software y técnicas para procesar grandes volúmenes de datos. Ejemplos. Aplicaciones en diferentes campos profesionales. Importancia del proceso de visualización de la información. La representación visual de los datos: herramientas y técnicas de visualización de la información. Técnicas para visualización de múltiples variables. Técnicas de storytelling para la presentación de resultados. Buenas prácticas en la generación de reportes. Ejemplos y aplicaciones."},
@@ -258,7 +262,7 @@ const S = [
    ["Tipos de ataque","Phishing, malware, ransomware, DoS, man-in-the-middle. Inyección SQL, XSS, CSRF. Data poisoning y prompt injection."],
    ["OWASP Top 10","Recorrido de la versión vigente y prevención en código: consultas parametrizadas, validación, escape."],
    ["Autenticación y autorización","Quién sos vs. qué podés hacer. Hash de contraseñas (bcrypt, Argon2), MFA. RBAC, ABAC, mínimo privilegio."],
-   ["OAuth 2.0, tokens y sesiones","Authorization code + PKCE, client credentials, OpenID Connect. JWT. Cookies HttpOnly, Secure, SameSite."],
+   ["OAuth 2.0, tokens y sesiones","Authorization code + PKCE, client credentials, OpenID Connect. JWT. Cookies HttpOnly, Secure, SameSite.",0,"Flujos implicit y password de OAuth 2.0: OAuth 2.1 los elimina por inseguros. Usar authorization code con PKCE."],
    ["Logs, monitoreo y respuesta","Qué registrar y qué no. Análisis de logs. Prevención, detección, respuesta y reparación; backups."],
    ["Seguridad en apps con IA y cadena de suministro","OWASP Top 10 para aplicaciones LLM: prompt injection, fuga de datos, salidas inseguras. Manejo de secretos. Dependencias vulnerables. Passkeys.",1]],
   tech:[["OWASP Top 10","Referencia de vulnerabilidades","e"],["OAuth 2.0 / OpenID Connect","Autorización delegada","e"],["OWASP Juice Shop / WebGoat","Laboratorio vulnerable","s"],["JWT (PyJWT)","Tokens","s"],["Flask / FastAPI","Login seguro","s"],["bcrypt / Argon2","Hash de contraseñas","s"],["Burp Suite / OWASP ZAP","Análisis de tráfico","s"],["Python logging, ELK, Loki","Registro y análisis de logs","s"],["Wireshark","Análisis de red","o"],["OWASP Top 10 for LLM Applications","Riesgos de apps con IA","a"],["gitleaks / Dependabot","Secretos y dependencias","a"]],
@@ -301,7 +305,7 @@ const S = [
    ["TDD","Ciclo Red, Green, Refactor. Tests como documentación. Katas."],
    ["Integración y automatización","Pruebas con base de datos y APIs. Validación de datos en pipelines. Automatización de UI y API. Integración continua."],
    ["Seguridad de los sistemas","Análisis estático, dependencias vulnerables, DAST básico. Relación con OWASP."],
-   ["Documentación de QA","Plan de pruebas (IEEE 829 / ISO 29119), casos y diseño de casos. Reporte de bugs, logs, evidencias, reportes de herramientas."],
+   ["Documentación de QA","Plan de pruebas (ISO/IEC/IEEE 29119), casos y diseño de casos. Reporte de bugs, logs, evidencias, reportes de herramientas.",0,"IEEE 829: norma reemplazada por ISO/IEC/IEEE 29119 en 2013, aunque muchas plantillas todavía la citan."],
    ["Testing de pipelines y modelos","Pruebas de datos y de transformaciones. Validación de modelos: métricas mínimas, regresión de rendimiento, drift. Uso crítico de IA para generar tests.",1]],
   tech:[["unittest (Python)","Pruebas unitarias","e"],["TDD y CI","Prácticas del programa","e"],["pytest, pytest-cov","Unitarias y cobertura","s"],["unittest.mock / pytest-mock","Dobles de prueba","s"],["GitHub Actions / GitLab CI","Integración continua","s"],["Selenium / Playwright","Automatización de UI","s"],["Postman / requests + pytest","Pruebas de API","s"],["Great Expectations / pandera","Testing de datos","s"],["Bandit, pip-audit, SonarQube","Seguridad y calidad","s"],["Jira / TestRail / GitHub Issues","Gestión de casos y bugs","s"],["Evidently","Monitoreo de modelos y drift","a"]],
   from:"Programación I, Procesamiento de Datos.", cross:"Ciberseguridad, Práctica Profesionalizante I.", to:"Desarrollo de Sistemas de IA.",
@@ -310,7 +314,7 @@ const S = [
 ];
 const REG = {anual:"Anual", c1:"1º cuatrimestre", c2:"2º cuatrimestre"};
 const RC = {anual:"var(--anual)", c1:"var(--c1)", c2:"var(--c2)"};
-const SRC = {e:["Programa","e"], s:["Sugerida","s"], o:["Opcional","o"], a:["Actualización","a"]};
+const SRC = {e:["Programa","e"], s:["Sugerida","s"], o:["Opcional","o"], a:["Actualización","a"], d:["En desuso","d"]};
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 function chip(s){
@@ -346,7 +350,7 @@ function render(id){
     <div class="grid2">
       <div class="block">
         <h3>Unidades</h3>
-        <ol class="units">${s.units.map(u=>`<li class="${u[2] ? "is-upd" : ""}"><b>${esc(u[0])}${u[2] ? ' <span class="src a">Actualización</span>' : ""}</b><p>${esc(u[1])}</p></li>`).join("")}</ol>
+        <ol class="units">${s.units.map(u=>`<li class="${u[2] ? "is-upd" : ""}"><b>${esc(u[0])}${u[2] ? ' <span class="src a">Actualización</span>' : ""}</b><p>${esc(u[1])}</p>${u[3] ? `<p class="dep"><span class="src d">En desuso</span> ${esc(u[3])}</p>` : ""}</li>`).join("")}</ol>
         <p class="note">${esc(s.unitsNote || "El programa no define unidades; esta organización es una propuesta a partir de los contenidos oficiales.")}</p>
       </div>
       <div class="block">

@@ -5,6 +5,8 @@
 | Formación de Fundamento | 2º cuatrimestre | 53 | 5 | 80 | Programación I (1), Procesamiento de Datos (14) |
 
 > Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+>
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.
 
 ## De qué trata
 
@@ -52,7 +54,8 @@ Importancia del testeo. Técnicas. Herramientas. TDD, CI. Programación de UnitT
 - Relación con OWASP (ver Ciberseguridad).
 
 ### Unidad 7 — Documentación de QA
-- **Plan de pruebas** (estructura basada en IEEE 829 / ISO/IEC/IEEE 29119).
+- **Plan de pruebas** (estructura basada en ISO/IEC/IEEE 29119).
+- **En desuso**: IEEE 829, norma reemplazada por ISO/IEC/IEEE 29119 en 2013, aunque muchas plantillas todavía la citan.
 - Casos de prueba y especificación de diseño.
 - **Reporte de bugs**: pasos para reproducir, esperado vs. obtenido, severidad/prioridad.
 - Logs de errores, evidencias y reportes generados por herramientas.

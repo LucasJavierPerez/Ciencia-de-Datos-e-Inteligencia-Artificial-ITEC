@@ -5,6 +5,8 @@
 | Formación Específica | Anual | 107 | 5 | 160 | Análisis Matemático (6), Álgebra (7) |
 
 > Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+>
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.
 
 ## De qué trata
 
@@ -28,6 +30,7 @@ Problemáticas actuales vinculadas al uso y manejo de la información. Caracter�
 - Analítica predictiva y prescriptiva ("¿qué va a pasar?", "¿qué conviene hacer?").
 - Para qué le sirven un data warehouse, los data marts y OLAP al negocio (la parte técnica se ve en Procesamiento de Datos). KPIs.
 - Casos: churn, scoring crediticio, pronóstico de demanda, recomendación.
+- **En desuso**: cubos OLAP tradicionales (MOLAP, SSAS). Los warehouses columnares consultan directo sin precalcular cubos; alcanza con entender el concepto.
 
 ### Unidad 3 — Tableros de control y visualización para decisiones
 - Tableros (dashboards): tipos (operativo, táctico, estratégico), ventajas y desventajas.

@@ -5,6 +5,8 @@
 | Formación Específica | Anual | 107 | 5 | 160 | Lógica (5), Análisis Matemático (6), Álgebra (7) |
 
 > Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+>
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.
 
 ## De qué trata
 
@@ -22,7 +24,8 @@ Definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis de
 - Población, muestra, variable, parámetro vs. estadístico.
 - Tipos de variables: cualitativas (nominal, ordinal) y cuantitativas (discretas, continuas).
 - Tablas de frecuencia (absoluta, relativa, acumulada), datos agrupados en intervalos.
-- Gráficos: histograma, barras, boxplot, diagrama de tallo y hoja.
+- Gráficos: histograma, barras, boxplot.
+- **En desuso**: diagrama de tallo y hoja, técnica de la época del cálculo a mano; hoy se usa histograma o boxplot.
 
 ### Unidad 2 — Medidas descriptivas y EDA
 - Posición/tendencia central: media, mediana, moda, cuartiles, percentiles.
@@ -43,7 +46,8 @@ Definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis de
 ### Unidad 5 — Distribuciones continuas y fiabilidad
 - Función de densidad. Uniforme, Exponencial, **Normal**, estandarización (Z).
 - **Fiabilidad**: tiempo hasta la falla, función de supervivencia, tasa de falla.
-- Suma de variables aleatorias. **Teorema Central del Límite**. Aproximación normal a la binomial y Poisson.
+- Suma de variables aleatorias. **Teorema Central del Límite**.
+- **En desuso**: aproximación normal a la binomial y Poisson para calcular a mano. Hoy el software da la probabilidad exacta; sirve para entender el TCL, no para calcular.
 
 ### Unidad 6 — Inferencia estadística
 - Distribuciones muestrales. Estimación puntual y por intervalos de confianza.

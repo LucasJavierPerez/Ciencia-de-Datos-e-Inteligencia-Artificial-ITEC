@@ -5,6 +5,8 @@
 | Formación de Fundamento | 1º cuatrimestre | 53 | 5 | 80 | Programación I (1), Base de Datos (8) |
 
 > Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+>
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.
 
 ## De qué trata
 
@@ -41,6 +43,7 @@ Seguridad y ciberseguridad. Tipos de ataque. Estrategias de seguridad, control y
 
 ### Unidad 5 — OAuth 2.0, tokens y sesiones
 - Flujos OAuth 2.0 (authorization code + PKCE, client credentials); OpenID Connect.
+- **En desuso**: flujos implicit y password de OAuth 2.0. OAuth 2.1 los elimina por inseguros; usar authorization code con PKCE.
 - **JWT**: estructura, firma, validación, expiración y refresh tokens.
 - **Cookies**: atributos `HttpOnly`, `Secure`, `SameSite`; sesiones del lado servidor vs. tokens.
 

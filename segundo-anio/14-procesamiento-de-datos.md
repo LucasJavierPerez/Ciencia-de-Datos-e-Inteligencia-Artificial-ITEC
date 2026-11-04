@@ -5,6 +5,8 @@
 | Formación Específica | 1º cuatrimestre | 64 | 6 | 96 | Programación I (1), Sistemas de Comunicación (4), Base de Datos (8) |
 
 > Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+>
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica: alcanza con conocerlo.
 
 ## De qué trata
 
@@ -37,7 +39,7 @@ Lenguajes de programación para procesamiento y análisis de datos; los más uti
 ### Unidad 4 — Big Data
 - Concepto y las "V" (volumen, velocidad, variedad, veracidad, valor).
 - Terminología: macrodatos, datos masivos, inteligencia de datos.
-- Hadoop (HDFS, MapReduce) como contexto histórico.
+- **En desuso**: Hadoop (HDFS, MapReduce), reemplazados por Spark y los warehouses en la nube. Verlos como historia, no como herramienta a aprender.
 - Procesamiento distribuido actual: **Apache Spark** (PySpark).
 - Alternativas para datos "medianos": Polars, DuckDB, Dask.
 - Aplicaciones en distintos campos profesionales.
@@ -76,7 +78,7 @@ Lenguajes de programación para procesamiento y análisis de datos; los más uti
 | pandas, NumPy | Manipulación de datos | Sugerida |
 | Polars / DuckDB | Datos medianos de alto rendimiento | Sugerida |
 | Apache Spark (PySpark) | Big Data | Sugerida (programa: "grandes volúmenes") |
-| Hadoop | Contexto histórico | Opcional |
+| Hadoop | Reemplazado por Spark y la nube | **En desuso** |
 | matplotlib, seaborn, plotly | Visualización | Sugerida |
 | Power BI / Tableau / Looker Studio | Dashboards y reportes | Sugerida |
 | Streamlit | Apps de datos rápidas | Opcional |

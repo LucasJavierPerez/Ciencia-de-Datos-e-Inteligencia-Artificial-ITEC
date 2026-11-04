@@ -20,4 +20,6 @@ Editá [`docentes.json`](docentes.json) y completá `nombre` y, si querés, `con
 
 > Lo marcado como **Actualización** no está en el programa oficial (2022): son temas agregados para ponerlo al día (data warehouse/lake, IA generativa, regulación de IA, seguridad en apps con LLM, entre otros).
 >
+> Lo marcado como **En desuso** sigue en el programa, pero hoy casi no se usa en la práctica (Hadoop, cubos OLAP, IEEE 829, entre otros).
+>
 > Las unidades y tecnologías de cada materia son una propuesta armada a partir de los contenidos mínimos del programa, que no define unidades. Conviene compararlas con la planificación de cada docente.
