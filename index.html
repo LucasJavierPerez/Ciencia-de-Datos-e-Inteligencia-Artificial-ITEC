@@ -382,6 +382,10 @@ fetch("docentes.json", {cache: "no-store"})
     dbState = "ready"; renderChipTeachers(); renderTeacher();
   });
 
+function route(){ render(location.hash.slice(1)); }
+window.addEventListener("hashchange", route);
+route();
+
 const PLAN = [
  ["Año 1", 534, "257 anuales · 277 cuatrimestrales", [["a",1,"Programación I",107,5,160],["a",2,"Inglés I",43,2,64],["a",3,"Proyecto Integrador",107,5,160],["1",4,"Sistemas de Comunicación",32,3,48],["1",5,"Lógica",43,4,64],["1",6,"Análisis Matemático",53,5,80],["2",7,"Álgebra",53,5,80],["2",8,"Base de Datos",64,6,96],["2",9,"Ética y Deontología Profesional",32,3,48]]],
  ["Año 2", 640, "257 anuales · 383 cuatrimestrales", [["a",10,"Ciencia de Datos",107,5,160],["a",11,"Inglés II",43,2,64],["a",12,"Estadísticas y Exploración de Datos",107,5,160],["1",13,"Tecnología y Sociedad",32,3,48],["1",14,"Procesamiento de Datos",64,6,96],["1",15,"Ciberseguridad",53,5,80],["2",16,"Práctica Profesionalizante I",128,12,192],["2",17,"Gerencia de Proyectos",53,5,80],["2",18,"Testeo de Software",53,5,80]]],
