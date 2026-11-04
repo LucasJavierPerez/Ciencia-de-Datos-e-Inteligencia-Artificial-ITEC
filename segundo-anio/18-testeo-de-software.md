@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación de Fundamento | 2º cuatrimestre | 53 | 5 | 80 | Programación I (1), Procesamiento de Datos (14) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 Cómo asegurar que el software (y los pipelines de datos) funcionen: técnicas de prueba, **pruebas unitarias**, **TDD**, **integración continua (CI)**, automatización y toda la documentación formal de QA (plan de pruebas, casos, reportes de bugs, evidencias).
@@ -55,6 +57,11 @@ Importancia del testeo. Técnicas. Herramientas. TDD, CI. Programación de UnitT
 - **Reporte de bugs**: pasos para reproducir, esperado vs. obtenido, severidad/prioridad.
 - Logs de errores, evidencias y reportes generados por herramientas.
 
+### Unidad 8 — Testing de pipelines y modelos *(Actualización)*
+- Pruebas de datos y de transformaciones.
+- Validación de modelos: métricas mínimas, regresión de rendimiento, drift.
+- Uso crítico de IA para generar tests.
+
 ## Tecnologías a ver
 
 | Tecnología | Uso | Fuente |
@@ -68,6 +75,7 @@ Importancia del testeo. Técnicas. Herramientas. TDD, CI. Programación de UnitT
 | Great Expectations / pandera | Testing de datos | Sugerida |
 | Bandit, pip-audit, SonarQube | Seguridad y calidad de código | Sugerida |
 | Jira / TestRail / GitHub Issues | Gestión de casos y bugs | Sugerida |
+| Evidently | Monitoreo de modelos y drift | **Actualización** |
 
 ## Articulación
 

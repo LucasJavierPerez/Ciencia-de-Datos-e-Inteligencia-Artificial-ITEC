@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación Específica | Anual | 107 | 5 | 160 | Lógica (5), Análisis Matemático (6), Álgebra (7) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 La **base matemática de todo lo que viene después** (minería, machine learning). Arranca con estadística descriptiva, pasa por probabilidad y distribuciones, y llega a inferencia, regresión y ANOVA. Es la materia más importante del año para el perfil: sin esto, un modelo de ML es una caja negra.
@@ -14,7 +16,7 @@ Definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis de
 
 ## Unidades (propuesta de organización)
 
-> El programa no define unidades; esta es una organización sugerida. Como es anual, las unidades 1–4 caen aprox. en el 1º cuatrimestre y 5–8 en el 2º.
+> El programa no define unidades; esta es una organización sugerida. Como es anual, las unidades 1–4 caen aprox. en el 1º cuatrimestre y 5–9 en el 2º.
 
 ### Unidad 1 — Fundamentos y estadística descriptiva
 - Población, muestra, variable, parámetro vs. estadístico.
@@ -58,6 +60,12 @@ Definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis de
 - **Análisis de varianza** de un factor; comparaciones múltiples.
 - **Control estadístico de procesos**: gráficos de control (X̄, R, p), límites de control.
 
+### Unidad 9 — Estadística aplicada en la industria *(Actualización)*
+- A/B testing y cálculo de tamaño de muestra.
+- Bootstrap y remuestreo.
+- Introducción a la inferencia bayesiana.
+- Correlación vs. causalidad en datos observacionales.
+
 ## Tecnologías a ver
 
 | Tecnología | Uso | Fuente |
@@ -71,6 +79,7 @@ Definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis de
 | ydata-profiling | EDA automatizado | Sugerida |
 | R + RStudio | Alternativa clásica para estadística | Opcional |
 | Excel / GeoGebra | Cálculo manual y visualización de distribuciones | Opcional |
+| PyMC | Intro a modelos bayesianos | **Actualización** |
 
 ## Articulación
 

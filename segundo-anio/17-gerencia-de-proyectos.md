@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación de Fundamento | 2º cuatrimestre | 53 | 5 | 80 | Ética y Deontología (9), Tecnología y Sociedad (13) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 Cómo **planificar, financiar, ejecutar, controlar y cerrar** un proyecto dentro de una organización. Suma gestión de calidad, riesgos laborales, ambiente y eficiencia energética, gestión de personas y el marco legal de la profesión.
@@ -51,6 +53,11 @@ La gestión de proyectos y sus elementos. Etapas y criterios de planificación. 
 - Ejercicio legal de la profesión y normativa vigente (contratos, propiedad intelectual).
 - Responsabilidad y compromiso social del profesional.
 
+### Unidad 8 — Gestión de proyectos de datos e IA *(Actualización)*
+- Incertidumbre experimental y entregas iterativas.
+- Costos de nube (FinOps).
+- Riesgos propios de la IA: sesgo, privacidad, dependencia de proveedores.
+
 ## Tecnologías a ver
 
 | Tecnología | Uso | Fuente |
@@ -61,6 +68,7 @@ La gestión de proyectos y sus elementos. Etapas y criterios de planificación. 
 | Excel / Google Sheets | Presupuesto, VAN/TIR, EVM | Sugerida |
 | Slack / Teams / Discord | Comunicación del equipo | Sugerida |
 | Miro / FigJam | Planificación colaborativa | Opcional |
+| Calculadoras de costos de AWS / GCP | Estimar costos de nube | **Actualización** |
 
 ## Articulación
 

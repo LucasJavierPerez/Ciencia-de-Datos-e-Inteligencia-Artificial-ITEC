@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Práctica Profesionalizante | 2º cuatrimestre | 128 | 12 | 192 | Programación I (1), Inglés I (2), Proyecto Integrador (3), Base de Datos (8), Ética (9) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 La **materia con más carga horaria del año** (12 hs cátedra semanales). No tiene temas nuevos: es un proyecto real o simulado donde integrás todo lo visto, con el docente actuando como **cliente**. Continúa el portfolio iniciado en Proyecto Integrador y el resultado forma parte del portfolio con el que egresás.
@@ -55,6 +57,7 @@ Espacio destinado a integrar y contrastar los saberes de los demás espacios, ar
 | GitHub Actions / cron / Airflow (intro) | Actualización en línea | Sugerida (programa: "actualización en línea") |
 | Streamlit Community Cloud / Render / Hugging Face Spaces | Despliegue | Opcional |
 | Git, GitHub, Trello / Jira / GitHub Projects | Organización del equipo | Sugerida |
+| Docker | Despliegue reproducible | **Actualización** |
 
 ## Articulación
 

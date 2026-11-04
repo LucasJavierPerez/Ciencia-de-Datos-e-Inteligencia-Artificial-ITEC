@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación de Fundamento | 1º cuatrimestre | 53 | 5 | 80 | Programación I (1), Base de Datos (8) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 Seguridad aplicada al desarrollo: tipos de ataque, el **OWASP Top 10**, autenticación vs. autorización, **OAuth** y tokens, manejo de sesiones/cookies, y logs para detectar y analizar incidentes. El enfoque es el del desarrollador que construye sistemas que manejan datos sensibles, no el de un pentester.
@@ -48,6 +50,12 @@ Seguridad y ciberseguridad. Tipos de ataque. Estrategias de seguridad, control y
 - Análisis de logs para detectar incidentes.
 - Estrategias: prevención, detección, respuesta, control y reparación del daño; backups y plan de recuperación.
 
+### Unidad 7 — Seguridad en apps con IA y cadena de suministro *(Actualización)*
+- OWASP Top 10 para aplicaciones LLM: prompt injection, fuga de datos, salidas inseguras.
+- Manejo de secretos (`.env`, gestores de secretos, nunca en el repo).
+- Dependencias vulnerables y actualizaciones automáticas.
+- Passkeys / WebAuthn.
+
 ## Tecnologías a ver
 
 | Tecnología | Uso | Fuente |
@@ -61,6 +69,8 @@ Seguridad y ciberseguridad. Tipos de ataque. Estrategias de seguridad, control y
 | Wireshark | Análisis de red | Opcional |
 | Python `logging`, ELK Stack / Grafana Loki | Registro y análisis de logs | Sugerida (programa: "logs") |
 | Keycloak / Auth0 | Proveedor de identidad | Opcional |
+| OWASP Top 10 for LLM Applications | Riesgos de apps con IA | **Actualización** |
+| gitleaks / Dependabot | Secretos y dependencias | **Actualización** |
 
 ## Articulación
 

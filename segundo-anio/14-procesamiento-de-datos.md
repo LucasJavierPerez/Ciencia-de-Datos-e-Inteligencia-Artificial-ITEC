@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación Específica | 1º cuatrimestre | 64 | 6 | 96 | Programación I (1), Sistemas de Comunicación (4), Base de Datos (8) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 La materia **más técnica/práctica del 1º cuatrimestre**: lenguajes y herramientas para procesar y analizar datos, introducción a Big Data, y visualización + storytelling para comunicar resultados. Es donde se arma el "toolbox" que vas a usar el resto de la carrera.
@@ -35,20 +37,33 @@ Lenguajes de programación para procesamiento y análisis de datos; los más uti
 ### Unidad 4 — Big Data
 - Concepto y las "V" (volumen, velocidad, variedad, veracidad, valor).
 - Terminología: macrodatos, datos masivos, inteligencia de datos.
-- Procesamiento distribuido: Hadoop (HDFS, MapReduce), **Apache Spark** (PySpark).
-- Almacenamiento: data lake, data warehouse, formatos columnar (Parquet).
+- Hadoop (HDFS, MapReduce) como contexto histórico.
+- Procesamiento distribuido actual: **Apache Spark** (PySpark).
 - Alternativas para datos "medianos": Polars, DuckDB, Dask.
 - Aplicaciones en distintos campos profesionales.
 
-### Unidad 5 — Visualización de la información
+### Unidad 5 — Arquitecturas de datos analíticos *(Actualización)*
+- OLTP vs. OLAP: por qué no se analiza sobre la base de producción.
+- **Data warehouse**: enfoques de Kimball e Inmon, tablas de hechos y dimensiones, modelo estrella y copo de nieve, data marts.
+- **Data lake**: datos crudos, schema-on-read, formatos Parquet y Avro, riesgo de *data swamp*.
+- **Lakehouse**: Delta Lake o Apache Iceberg; arquitectura medallion (bronze/silver/gold).
+- ETL vs. ELT; transformaciones con **dbt**; orquestación con **Airflow**.
+- Warehouses en la nube: BigQuery, Snowflake, Redshift. Práctica local con DuckDB.
+
+### Unidad 6 — Visualización de la información
 - Principios: percepción, elección del gráfico según el mensaje, color, accesibilidad.
 - Visualización de múltiples variables: scatter matrix, heatmaps, facetas, coordenadas paralelas.
 - Visualización interactiva y dashboards.
 
-### Unidad 6 — Storytelling y reportes
+### Unidad 7 — Storytelling y reportes
 - Estructura narrativa: contexto → conflicto → resolución.
 - Diseño de reportes y buenas prácticas (un mensaje por gráfico, eliminar ruido).
 - Presentación de resultados a audiencias no técnicas.
+
+### Unidad 8 — Calidad, gobierno y reproducibilidad *(Actualización)*
+- Calidad de datos, linaje, catálogo, data contracts.
+- Entornos reproducibles con uv y Docker.
+- Notebooks versionados.
 
 ## Tecnologías a ver
 
@@ -60,11 +75,17 @@ Lenguajes de programación para procesamiento y análisis de datos; los más uti
 | Jupyter / Colab / VS Code | Entornos | Sugerida (programa: "entornos de software") |
 | pandas, NumPy | Manipulación de datos | Sugerida |
 | Polars / DuckDB | Datos medianos de alto rendimiento | Sugerida |
-| Apache Spark (PySpark), Hadoop | Big Data | Sugerida (programa: "grandes volúmenes") |
+| Apache Spark (PySpark) | Big Data | Sugerida (programa: "grandes volúmenes") |
+| Hadoop | Contexto histórico | Opcional |
 | matplotlib, seaborn, plotly | Visualización | Sugerida |
 | Power BI / Tableau / Looker Studio | Dashboards y reportes | Sugerida |
 | Streamlit | Apps de datos rápidas | Opcional |
 | Git + GitHub | Versionado | Sugerida |
+| dbt | Transformaciones en el warehouse | **Actualización** |
+| Apache Airflow | Orquestación de pipelines | **Actualización** |
+| Delta Lake / Apache Iceberg | Lakehouse | **Actualización** |
+| BigQuery / Snowflake | Warehouse en la nube | **Actualización** |
+| Docker, uv | Reproducibilidad | **Actualización** |
 
 ## Articulación
 

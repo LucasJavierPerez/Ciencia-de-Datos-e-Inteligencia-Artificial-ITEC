@@ -18,4 +18,6 @@ Apuntes de la Tecnicatura Superior en Ciencia de Datos e Inteligencia Artificial
 
 Editá [`docentes.json`](docentes.json) y completá `nombre` y, si querés, `contacto` (mail, aula u horario de consulta) en la materia que corresponda. La página lo muestra después del próximo despliegue, en uno o dos minutos.
 
+> Lo marcado como **Actualización** no está en el programa oficial (2022): son temas agregados para ponerlo al día (data warehouse/lake, IA generativa, regulación de IA, seguridad en apps con LLM, entre otros).
+>
 > Las unidades y tecnologías de cada materia son una propuesta armada a partir de los contenidos mínimos del programa, que no define unidades. Conviene compararlas con la planificación de cada docente.

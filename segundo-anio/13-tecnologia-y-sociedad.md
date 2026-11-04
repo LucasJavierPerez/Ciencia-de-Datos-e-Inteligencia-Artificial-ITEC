@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación de Fundamento | 1º cuatrimestre | 32 | 3 | 48 | Sistemas de Comunicación (4), Ética y Deontología (9) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 Materia reflexiva sobre la relación entre **ciencia, tecnología y sociedad (CTS)**: cómo se produce el conocimiento científico-tecnológico, quién se beneficia, cómo impacta la innovación en el trabajo, la economía y el ambiente, y cómo se gestiona la innovación en una organización. Para alguien de IA es especialmente relevante: automatización, sesgos, concentración tecnológica.
@@ -44,6 +46,12 @@ Ciencia y Tecnología: perspectivas, tensiones y dilemas. El enfoque CTS. Necesi
 ### Unidad 6 — Gestión de la innovación en organizaciones
 - Estrategias de innovación (abierta, cerrada, vigilancia tecnológica).
 - Ciclo de vida de la innovación; gestión del cambio.
+
+### Unidad 7 — IA generativa y sociedad *(Actualización)*
+- Automatización del trabajo cognitivo.
+- Derechos de autor y datos de entrenamiento.
+- Consumo energético de los LLMs.
+- Desinformación y deepfakes.
 
 ## Tecnologías / recursos a ver
 

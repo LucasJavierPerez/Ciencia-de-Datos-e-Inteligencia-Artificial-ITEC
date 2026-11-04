@@ -4,6 +4,8 @@
 |---|---|---:|---:|---:|---|
 | Formación Específica | Anual | 107 | 5 | 160 | Análisis Matemático (6), Álgebra (7) |
 
+> Lo marcado como **Actualización** no está en el programa oficial (RM 213/22, 2022): son temas agregados para ponerlo al día.
+
 ## De qué trata
 
 Es la materia "de negocio" de la carrera: no se centra en programar modelos sino en **para qué** se usan los datos en una organización. Ubica la ciencia de datos frente a la gestión tradicional de información y la Business Intelligence, trabaja el ciclo de un proyecto de datos con un cliente real (relevamiento, alcance, negociación) y cierra con el marco legal: privacidad, propiedad intelectual y licencias.
@@ -24,7 +26,7 @@ Problemáticas actuales vinculadas al uso y manejo de la información. Caracter�
 ### Unidad 2 — Business Intelligence vs. Análisis Predictivo
 - BI: análisis descriptivo/diagnóstico ("¿qué pasó?", "¿por qué?").
 - Analítica predictiva y prescriptiva ("¿qué va a pasar?", "¿qué conviene hacer?").
-- Data warehouse, data mart, OLAP, KPIs.
+- Para qué le sirven un data warehouse, los data marts y OLAP al negocio (la parte técnica se ve en Procesamiento de Datos). KPIs.
 - Casos: churn, scoring crediticio, pronóstico de demanda, recomendación.
 
 ### Unidad 3 — Tableros de control y visualización para decisiones
@@ -48,6 +50,15 @@ Problemáticas actuales vinculadas al uso y manejo de la información. Caracter�
 - Privacidad, anonimización y seudonimización.
 - Propiedad intelectual (Ley 11.723), copyright, licencias de software (GPL, MIT, Apache, Creative Commons), licencias de datasets.
 
+### Unidad 7 — IA generativa en el trabajo con datos *(Actualización)*
+- LLMs como asistentes para explorar datos, escribir SQL y código.
+- Límites: alucinaciones, privacidad de lo que se sube, verificación de resultados.
+
+### Unidad 8 — Regulación de la IA *(Actualización)*
+- EU AI Act (2024) y su clasificación por riesgo.
+- Proyectos de ley y recomendaciones en Argentina.
+- Transparencia y explicabilidad de modelos.
+
 ## Tecnologías a ver
 
 | Tecnología | Uso | Fuente |
@@ -57,6 +68,7 @@ Problemáticas actuales vinculadas al uso y manejo de la información. Caracter�
 | Python + Jupyter (pandas, matplotlib/seaborn) | Exploración y gráficos para casos | Sugerida |
 | SQL | Consultar fuentes de datos de la organización | Sugerida (articula con Base de Datos) |
 | Metabase / Apache Superset | BI open source | Sugerida |
+| ChatGPT / Claude / Copilot | Asistentes de análisis y código | **Actualización** |
 
 ## Articulación
 
