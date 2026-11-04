@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Segundo Año · Ciencia de Datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: plan header → clickable semester grid (the "cursada") → one subject sheet at a time, hash-routed; full 3-year plan folded at the end */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --fg: #1b2230;
+  --muted: #5c6577;
+  --line: #dde1e8;
+  --accent: #b8860b;      /* plan's mustard, darkened for text contrast */
+  --accent-soft: #f6ecd2;
+  --anual: #b8860b;
+  --c1: #2f7f86;
+  --c2: #4f7d3a;
+  --c1-soft: #dcefef;
+  --c2-soft: #e3eedb;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d; --surface: #1a2029; --fg: #e6e9ef; --muted: #9aa3b4; --line: #2b3340;
+    --accent: #e0b24a; --accent-soft: #3a3020; --anual: #e0b24a; --c1: #5cbcc4; --c2: #8cc06e;
+    --c1-soft: #1c3335; --c2-soft: #233021; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d; --surface: #1a2029; --fg: #e6e9ef; --muted: #9aa3b4; --line: #2b3340;
+  --accent: #e0b24a; --accent-soft: #3a3020; --anual: #e0b24a; --c1: #5cbcc4; --c2: #8cc06e;
+  --c1-soft: #1c3335; --c2-soft: #233021; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 36px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+header { display: grid; gap: 14px; }
+header h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; }
+header h1 span { color: var(--accent); }
+.lede { color: var(--muted); max-width: 62ch; margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 4px; }
+.stat { display: grid; }
+.stat b { font-family: var(--font-mono); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat small { color: var(--muted); font-size: 13px; }
+
+/* Semester grid */
+.cursada { display: grid; gap: 12px; }
+.cursada-head, .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cursada-head div { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-left: 2px; }
+.cursada-head div b { color: var(--fg); font-weight: 600; }
+.col { display: grid; gap: 8px; align-content: start; }
+.chip {
+  all: unset; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface);
+  border-left: 4px solid var(--rc); min-width: 0;
+}
+.chip .n { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.chip .name { font-weight: 600; flex: 1; min-width: 0; }
+.chip .hs { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.chip.anual { grid-column: 1 / -1; --rc: var(--anual); }
+.chip.c1 { --rc: var(--c1); }
+.chip.c2 { --rc: var(--c2); }
+.chip:hover { border-color: var(--rc); }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chip[aria-current="true"] { background: var(--accent-soft); border-color: var(--rc); }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+/* Subject sheet */
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: clamp(18px, 3vw, 32px); display: grid; gap: 26px; min-width: 0; }
+.sheet-top { display: grid; gap: 10px; }
+.sheet-top h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono); font-size: 12px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.pill.reg { color: var(--fg); border-color: var(--rc); background: color-mix(in srgb, var(--rc) 14%, transparent); }
+.about { font-size: 17px; max-width: 68ch; margin: 0; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+.block { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.block h3 { font-size: 19px; font-weight: 700; }
+.units { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: u; }
+.units li { counter-increment: u; display: grid; grid-template-columns: 34px 1fr; gap: 4px 10px; }
+.units li::before { content: counter(u); grid-row: span 2; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; height: 26px; display: grid; place-items: center; }
+.units b { font-weight: 600; }
+.units p { margin: 0; color: var(--muted); font-size: 15px; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.src { font-family: var(--font-mono); font-size: 11px; padding: 1px 7px; border-radius: 99px; white-space: nowrap; }
+.src.e { background: var(--accent-soft); color: var(--fg); border: 1px solid var(--accent); }
+.src.s { border: 1px solid var(--line); color: var(--muted); }
+.src.o { border: 1px dashed var(--line); color: var(--muted); }
+ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.links { display: grid; gap: 8px; font-size: 15px; }
+.links div span { color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; display: block; }
+details { border-top: 1px solid var(--line); padding-top: 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+details p { color: var(--muted); max-width: 75ch; }
+/* Teacher */
+.teacher { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 8px; }
+.teacher .who { display: grid; min-width: 0; flex: 1; }
+.teacher .who b { font-size: 17px; }
+.teacher .who small { color: var(--muted); overflow-wrap: anywhere; }
+.teacher .empty { color: var(--muted); }
+.teacher form { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; align-items: end; }
+.teacher label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); flex: 1 1 200px; min-width: 0; }
+.teacher input { font: inherit; font-size: 15px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; width: 100%; }
+.teacher input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.btn { text-decoration: none; display: inline-block; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--accent); background: transparent; color: var(--fg); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn:disabled { opacity: .5; cursor: default; }
+.chip .doc { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+.chip .doc:empty { display: none; }
+.plan { display: grid; gap: 14px; }
+.plan h2 { font-size: 24px; }
+.plan h3 { font-size: 17px; margin-top: 12px; }
+.tot { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+.reg-a { color: var(--anual); } .reg-1 { color: var(--c1); } .reg-2 { color: var(--c2); }
+@media (max-width: 520px) {
+  .cursada-head, .row { grid-template-columns: 1fr; }
+  .cursada-head div:nth-child(2) { display: none; }
+  .col.c2col::before { content: "2º cuatrimestre"; font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) { .sheet { animation: in .25s ease both; } @keyframes in { from { transform: translateY(4px); } to { transform: none; } } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Técnico Superior en Ciencia de Datos e IA · RM 213/22</div>
+    <h1>Segundo año, <span>materia por materia</span></h1>
+    <p class="lede">Las 9 materias de 2º año con sus contenidos oficiales, unidades, tecnologías y con qué se conectan. Tocá una materia en la grilla para ver su ficha.</p>
+    <div class="stats">
+      <div class="stat"><b>640</b><small>horas reloj</small></div>
+      <div class="stat"><b>9</b><small>espacios curriculares</small></div>
+      <div class="stat"><b>26 / 34</b><small>hs cátedra semanales (1º / 2º cuatr.)</small></div>
+      <div class="stat"><b>16</b><small>semanas por cuatrimestre</small></div>
+    </div>
+  </header>
+
+  <section class="cursada" aria-label="Cursada de segundo año">
+    <div class="cursada-head"><div><b>1º cuatrimestre</b> · 26 hs cát/sem</div><div><b>2º cuatrimestre</b> · 34 hs cát/sem</div></div>
+    <div class="row" id="anuales"></div>
+    <div class="row"><div class="col" id="col1"></div><div class="col c2col" id="col2"></div></div>
+    <div class="legend"><span><i style="background:var(--anual)"></i>Anual</span><span><i style="background:var(--c1)"></i>1º cuatrimestre</span><span><i style="background:var(--c2)"></i>2º cuatrimestre</span></div>
+  </section>
+
+  <article class="sheet" id="sheet" aria-live="polite"></article>
+
+  <section class="plan">
+    <h2>Plan completo</h2>
+    <p class="note">Copia de la grilla del diseño curricular. Horas reloj totales del plan: <span class="mono">1633</span>. Los números (1–18) son los de orden del programa, usados en las correlativas.</p>
+    <div id="plan"></div>
+  </section>
+</div>
+
+<script>
+const S = [
+ {id:"ciencia-de-datos", n:10, name:"Ciencia de Datos", reg:"anual", campo:"Formación Específica", hr:107, hs:5, ha:160, corr:"Análisis Matemático (6), Álgebra (7)",
+  about:"La materia de negocio de la carrera. No se centra en programar modelos sino en para qué se usan los datos en una organización: ciencia de datos frente a la gestión tradicional y la Business Intelligence, el ciclo de un proyecto con un cliente real y el marco legal de privacidad y licencias.",
+  units:[["Información y organizaciones","Dato, información, conocimiento. Procesos de las organizaciones. Gestión tradicional: OLTP, reportes, ERP/CRM."],
+   ["Business Intelligence vs. análisis predictivo","Analítica descriptiva, predictiva y prescriptiva. Data warehouse, OLAP, KPIs. Casos: churn, scoring, demanda, recomendación."],
+   ["Tableros de control y visualización","Tipos de dashboards, ventajas y desventajas. Diseño de KPIs. La visualización como ahorro de tiempo."],
+   ["Ciclo de vida de un proyecto de datos","CRISP-DM, TDSP, OSEMN. Relevamiento de requerimientos, alcance, negociación y criterios de éxito. Roles del equipo."],
+   ["Impacto estratégico","Autonomía tecnológica, desarrollo económico y competitividad. Casos de agro, fintech, salud y retail."],
+   ["Marco legal y ético","Ejercicio de la profesión. Ley 25.326 de datos personales y GDPR. Anonimización. Ley 11.723, copyright, licencias GPL, MIT, Apache y Creative Commons."]],
+  tech:[["Power BI / Tableau / Looker Studio","Tableros de control","s"],["Excel / Google Sheets","Análisis rápido, tablas dinámicas","s"],["Python + Jupyter (pandas, seaborn)","Exploración de casos","s"],["SQL","Consultar fuentes de la organización","s"],["Metabase / Superset","BI open source","s"]],
+  from:"Análisis Matemático, Álgebra, Base de Datos, Ética.", cross:"Estadísticas, Procesamiento de Datos, Gerencia de Proyectos.", to:"Minería de Datos, Aprendizaje Automático, Prácticas Profesionalizantes.",
+  practice:["Armar un tablero con KPIs sobre un dataset de datos.gob.ar.","Escribir un documento de relevamiento y alcance para un cliente ficticio siguiendo CRISP-DM.","Revisar las licencias de 3 datasets y 3 librerías que uses."],
+  official:"Problemáticas específicas actuales vinculadas al uso y manejo de la información. Características y procesos propios de las organizaciones. Modelos tradicionales de gestión de la información en las empresas y/u organizaciones. El uso actual de los tableros de control: ventajas y desventajas. La Ciencia de Datos como herramienta de análisis predictivo para la optimización de proyectos y/o negocios. Diferencias entre Inteligencia de Negocios y Análisis Predictivo. Capacidad analítica para el manejo de la información en la gestión de negocios. La visualización y transformación de la información como base innovadora para la toma de decisiones. La representación visual de datos como variable de ahorro de tiempo en las organizaciones. La ciencia de datos como factor clave para la autonomía tecnológica, el desarrollo económico y la competitividad en las industrias. Aplicación de la Ciencia de Datos: relevamiento de datos y requerimientos de necesidades. Negociación y acuerdos relativos al alcance del proyecto. Ejercicio legal de la profesión. Normativa vigente en relación a la utilización y manipulación de los datos. Privacidad de la información. Responsabilidades de emisión de datos e información en el ciberespacio. Propiedad intelectual. Licencias de software. Derechos de copyright."},
+ {id:"ingles-ii", n:11, name:"Inglés II", reg:"anual", campo:"Formación General", hr:43, hs:2, ha:64, corr:"Inglés I (2)",
+  about:"Continuación de Inglés I con foco en el inglés técnico de un profesional de datos: leer documentación e informes, describir procesos y comunicarse por mail, foros y videollamadas en nivel intermedio-avanzado (aprox. B1+/B2).",
+  units:[["Describing processes","Voz pasiva, secuenciadores (first, then, once, finally). Describir un pipeline o un algoritmo paso a paso."],
+   ["Technical vocabulary","dataset, feature, label, training, overfitting, deploy. Prefijos y sufijos. Falsos amigos."],
+   ["Reading technical reports","Documentación oficial, READMEs y papers cortos. Skimming y scanning. Gráficos y tablas en inglés."],
+   ["Advanced structures","Condicionales 0 a 3, modales de sugerencia y obligación, relative clauses, comparativos."],
+   ["Professional communication","E-mails formales, preguntas en foros (Stack Overflow, GitHub Issues), videollamadas y daily stand-ups."]],
+  tech:[["Documentación oficial (Python, pandas, scikit-learn)","Lectura técnica real","s"],["GitHub Issues / Stack Overflow","Escritura en foros","s"],["Zoom / Meet / Teams","Práctica oral","s"],["Kaggle","Vocabulario de datos en contexto","s"]],
+  from:"Inglés I.", cross:"Todas las materias técnicas; Testeo de Software (reportes de bugs).", to:"Todo el 3º año, con bibliografía mayormente en inglés.",
+  practice:["Escribir en inglés el README de un proyecto propio.","Redactar un issue de GitHub reportando un bug con pasos para reproducirlo.","Resumir en 150 palabras un artículo técnico."],
+  official:"Relato de un proceso de forma oral o escrita. Profundización del vocabulario técnico. Estructuras gramaticales, lexicales y funcionales avanzadas para ser empleadas en intercambios comunicativos orales y escritos en un nivel intermedio avanzado. Comprensión de informes relacionados al campo de estudio. Comunicación efectiva. Hacer sugerencias, dar y pedir consejo y realizar aportes en la lengua por medio de e-mails, videollamadas, foros, de manera fluida."},
+ {id:"estadisticas", n:12, name:"Estadísticas y Exploración de Datos", reg:"anual", campo:"Formación Específica", hr:107, hs:5, ha:160, corr:"Lógica (5), Análisis Matemático (6), Álgebra (7)",
+  about:"La base matemática de todo el 3º año. Va de la estadística descriptiva a la probabilidad y las distribuciones, y llega a inferencia, regresión y ANOVA. Es la materia más importante del año para el perfil: sin ella, un modelo de machine learning es una caja negra.",
+  units:[["Fundamentos y estadística descriptiva","Población, muestra, tipos de variables. Tablas de frecuencia, datos agrupados. Histograma, boxplot."],
+   ["Medidas descriptivas y EDA","Media, mediana, cuartiles; varianza, desvío, IQR; asimetría. Outliers. Análisis exploratorio completo."],
+   ["Probabilidad","Espacio muestral, axiomas, combinatoria. Probabilidad condicional, independencia, Teorema de Bayes."],
+   ["Variables aleatorias discretas","Esperanza y varianza. Bernoulli, Binomial, Pascal, Geométrica, Poisson. Modelos de fenómenos reales."],
+   ["Distribuciones continuas y fiabilidad","Uniforme, Exponencial, Normal. Tiempo hasta la falla. Suma de variables, Teorema Central del Límite, aproximaciones."],
+   ["Inferencia estadística","Intervalos de confianza, pruebas de hipótesis, p-valor, tests t, z y chi². No paramétricos: Mann-Whitney, Wilcoxon, Kruskal-Wallis."],
+   ["Correlación y regresión","Pearson y Spearman. Regresión lineal simple, R², residuos. Regresión múltiple y modelos econométricos."],
+   ["ANOVA y control estadístico","Análisis de varianza de un factor. Gráficos de control X̄, R y p."]],
+  unitsNote:"Es anual: las unidades 1 a 4 caen aproximadamente en el 1º cuatrimestre y 5 a 8 en el 2º.",
+  tech:[["Python + Jupyter / Colab","Entorno de trabajo","s"],["pandas","Carga, limpieza y descriptivos","s"],["NumPy","Cálculo numérico, simulación","s"],["matplotlib / seaborn","Histogramas, boxplots, pairplots","s"],["SciPy (scipy.stats)","Distribuciones y tests","s"],["statsmodels","Regresión y ANOVA","s"],["ydata-profiling","EDA automatizado","s"],["R + RStudio","Alternativa clásica","o"]],
+  from:"Lógica, Análisis Matemático (integrales y densidades), Álgebra (matrices y regresión múltiple).", cross:"Ciencia de Datos, Procesamiento de Datos.", to:"Minería de Datos, Aprendizaje Automático, Procesamiento de Imágenes y de Habla.",
+  practice:["Hacer un EDA completo de un dataset en un notebook.","Simular con NumPy el Teorema Central del Límite y graficarlo.","Ajustar una regresión con statsmodels e interpretar el summary()."],
+  official:"Estadística: definiciones y conceptos fundamentales. Estadísticos descriptivos. Análisis descriptivo de datos individuales y agrupados: variables discretas y continuas, medidas de posición, histogramas. Teoría de la probabilidad. Cálculo de probabilidades. Probabilidad condicional. Variables aleatorias discretas y continuas. Distribuciones binomial y de Pascal. Modelos relacionados con fenómenos de la vida. Fiabilidad. Modelos econométricos. La distribución normal. Sumas de variables aleatorias. Teorema central del límite. Aproximaciones. Modelización. Análisis no paramétrico. Principios de inferencia estadística. Teoría del control estadístico. Correlación y regresión lineal de dos variables. Conceptos básicos de regresión múltiple. Análisis de varianza."},
+ {id:"tecnologia-y-sociedad", n:13, name:"Tecnología y Sociedad", reg:"c1", campo:"Formación de Fundamento", hr:32, hs:3, ha:48, corr:"Sistemas de Comunicación (4), Ética (9)",
+  about:"Materia reflexiva sobre la relación entre ciencia, tecnología y sociedad (CTS): cómo se produce el conocimiento, quién se beneficia, cómo impacta la innovación en el trabajo, la economía y el ambiente. Para alguien de IA es muy directa: automatización, sesgos, concentración tecnológica.",
+  units:[["Ciencia, tecnología y enfoque CTS","Ciencia, técnica y tecnología. Determinismo tecnológico vs. construcción social. Uso dual."],
+   ["Investigación y conocimiento","Método científico. Sistema científico argentino (CONICET, INTA, INTI). I+D en empresas y startups."],
+   ["Democratización del conocimiento","Open science, open data, open source. Brecha digital. Modelos de IA abiertos vs. cerrados."],
+   ["Innovación y contexto","Innovación incremental, radical y disruptiva. Impacto social, económico y ambiental. Sesgos algorítmicos."],
+   ["Innovación y trabajo","Automatización e IA, plataformas, relaciones laborales. Rol del Estado y soberanía tecnológica."],
+   ["Gestión de la innovación","Innovación abierta, vigilancia tecnológica, gestión del cambio en organizaciones."]],
+  tech:[["Lecturas CTS latinoamericanas (Varsavsky, Sabato)","Marco teórico","s"],["Informes OIT, CEPAL, OECD sobre IA y trabajo","Casos y datos","s"],["Portales de datos abiertos","Ejemplos de democratización","s"]],
+  techNote:"Materia conceptual, sin stack técnico.",
+  from:"Sistemas de Comunicación, Ética y Deontología.", cross:"Ciencia de Datos (impacto y normativa).", to:"Gerencia de Proyectos (es su correlativa).",
+  practice:["Analizar con enfoque CTS un caso de IA con impacto social (reconocimiento facial, scoring).","Ensayo corto: cómo cambia tu futuro trabajo la IA generativa."],
+  official:"Ciencia y Tecnología. Perspectivas, tensiones y dilemas. La CTS (Ciencia, Tecnología y Sociedad). Necesidades sociales y desarrollo científico tecnológico e innovación en el actual contexto social. La investigación científico tecnológica en la construcción de conocimiento. La investigación científico tecnológica en el campo profesional. La difusión, socialización y democratización del conocimiento. La innovación tecnológica. Su vínculo y conexión con el contexto social, económico y ambiental. La innovación tecnológica en el mundo del trabajo: proceso de trabajo, relaciones laborales, rol del estado. Estrategias y gestión de la innovación tecnológica en las organizaciones."},
+ {id:"procesamiento-de-datos", n:14, name:"Procesamiento de Datos", reg:"c1", campo:"Formación Específica", hr:64, hs:6, ha:96, corr:"Programación I (1), Sistemas de Comunicación (4), Base de Datos (8)",
+  about:"La materia más técnica del 1º cuatrimestre: lenguajes y herramientas para procesar datos, introducción a Big Data, y visualización con storytelling para comunicar resultados. Acá se arma la caja de herramientas del resto de la carrera.",
+  units:[["Lenguajes para datos","Python, R, SQL, Julia, Scala y cuándo usar cada uno. Archivos CSV, JSON, Excel, Parquet. SQL analítico con window functions."],
+   ["Entornos y herramientas","Jupyter, Colab, VS Code, RStudio. Entornos virtuales. Git para proyectos de datos."],
+   ["Manipulación y limpieza","pandas: groupby, merge, pivot. Nulos, duplicados, fechas, texto, outliers. Encoding y feature engineering. ETL/ELT."],
+   ["Big Data","Las V del Big Data. Hadoop, Apache Spark (PySpark). Data lake y warehouse. Polars, DuckDB, Dask para datos medianos."],
+   ["Visualización","Percepción, elección del gráfico, color, accesibilidad. Múltiples variables: scatter matrix, heatmaps, facetas."],
+   ["Storytelling y reportes","Contexto, conflicto, resolución. Un mensaje por gráfico. Presentar a audiencias no técnicas."]],
+  tech:[["Python","Lenguaje principal","s"],["R","Comparación de lenguajes","s"],["SQL (PostgreSQL / SQLite)","Consulta de datos","s"],["Jupyter / Colab / VS Code","Entornos","s"],["pandas, NumPy","Manipulación","s"],["Polars / DuckDB","Datos medianos rápidos","s"],["Apache Spark, Hadoop","Big Data","s"],["matplotlib, seaborn, plotly","Visualización","s"],["Power BI / Tableau / Looker Studio","Dashboards y reportes","s"],["Streamlit","Apps de datos","o"],["Git + GitHub","Versionado","s"]],
+  from:"Programación I, Sistemas de Comunicación, Base de Datos.", cross:"Ciencia de Datos, Estadísticas.", to:"Testeo de Software (correlativa), Práctica Profesionalizante I, Minería de Datos.",
+  practice:["Pipeline completo: CSV crudo, limpieza con pandas, Parquet, dashboard.","Mismo análisis con pandas y con DuckDB o PySpark; comparar tiempos.","Presentar un hallazgo en 5 slides con storytelling."],
+  official:"Lenguajes de programación para el procesamiento y análisis de datos. Ejemplos más utilizados en la actualidad. Diferentes usos según el tipo de proyecto/negocio. Herramientas de software para Ciencia de Datos. Comparación y aplicaciones de diferentes entornos de software. Uso adecuado según los requerimientos del proyecto. La tecnología de grandes datos en la actualidad. Concepto de grandes volúmenes de datos. Diversas conceptualizaciones: macrodatos, datos masivos, inteligencia de datos o datos a gran escala. Herramientas de software y técnicas para procesar grandes volúmenes de datos. Ejemplos. Aplicaciones en diferentes campos profesionales. Importancia del proceso de visualización de la información. La representación visual de los datos: herramientas y técnicas de visualización de la información. Técnicas para visualización de múltiples variables. Técnicas de storytelling para la presentación de resultados. Buenas prácticas en la generación de reportes. Ejemplos y aplicaciones."},
+ {id:"ciberseguridad", n:15, name:"Ciberseguridad", reg:"c1", campo:"Formación de Fundamento", hr:53, hs:5, ha:80, corr:"Programación I (1), Base de Datos (8)",
+  about:"Seguridad aplicada al desarrollo: tipos de ataque, OWASP Top 10, autenticación y autorización, OAuth y tokens, sesiones y cookies, y logs para detectar incidentes. Mirada de quien construye sistemas que manejan datos sensibles.",
+  units:[["Fundamentos","Seguridad de la información vs. ciberseguridad. Tríada CIA. Activos, amenazas, vulnerabilidades, riesgo."],
+   ["Tipos de ataque","Phishing, malware, ransomware, DoS, man-in-the-middle. Inyección SQL, XSS, CSRF. Data poisoning y prompt injection."],
+   ["OWASP Top 10","Recorrido de la versión vigente y prevención en código: consultas parametrizadas, validación, escape."],
+   ["Autenticación y autorización","Quién sos vs. qué podés hacer. Hash de contraseñas (bcrypt, Argon2), MFA. RBAC, ABAC, mínimo privilegio."],
+   ["OAuth 2.0, tokens y sesiones","Authorization code + PKCE, client credentials, OpenID Connect. JWT. Cookies HttpOnly, Secure, SameSite."],
+   ["Logs, monitoreo y respuesta","Qué registrar y qué no. Análisis de logs. Prevención, detección, respuesta y reparación; backups."]],
+  tech:[["OWASP Top 10","Referencia de vulnerabilidades","e"],["OAuth 2.0 / OpenID Connect","Autorización delegada","e"],["OWASP Juice Shop / WebGoat","Laboratorio vulnerable","s"],["JWT (PyJWT)","Tokens","s"],["Flask / FastAPI","Login seguro","s"],["bcrypt / Argon2","Hash de contraseñas","s"],["Burp Suite / OWASP ZAP","Análisis de tráfico","s"],["Python logging, ELK, Loki","Registro y análisis de logs","s"],["Wireshark","Análisis de red","o"]],
+  from:"Programación I, Base de Datos.", cross:"Ciencia de Datos (privacidad), Testeo de Software (pruebas de seguridad).", to:"Desarrollo de Sistemas de IA.",
+  practice:["Explotar y corregir una inyección SQL en una app de prueba.","Login con contraseñas hasheadas y JWT en FastAPI.","Resolver desafíos de OWASP Juice Shop.","Detectar intentos de fuerza bruta en un log con pandas."],
+  official:"Seguridad y ciberseguridad. Tipos de ataque. Estrategias de seguridad, control y reparación de daño. OWASP Top 10. Autenticación vs. Autorización. OAuth para generación y validación de token. Uso de log-ins. Cookies. Logs: registro y análisis."},
+ {id:"practica-profesionalizante-i", n:16, name:"Práctica Profesionalizante I", reg:"c2", campo:"Práctica Profesionalizante", hr:128, hs:12, ha:192, corr:"Programación I (1), Inglés I (2), Proyecto Integrador (3), Base de Datos (8), Ética (9)",
+  about:"La materia con más carga del año: 12 hs cátedra por semana. No trae temas nuevos; es un proyecto donde integrás todo, con el docente como cliente. Continúa el portfolio de Proyecto Integrador y el resultado queda en el portfolio con el que egresás.",
+  units:[["Relevamiento y propuesta","Elección del problema, entrevista con el cliente, alcance, criterios de éxito. Plan con entregas en Scrum o Kanban."],
+   ["Datos","Bases de datos, APIs, web scraping, datasets abiertos. Limpieza, integración, EDA y documentación."],
+   ["Modelado e inferencia","Modelos de inferencia estadística o predictivos simples. Métricas de interés técnicas y de negocio."],
+   ["Post-procesamiento y visualización","Interpretar los patrones descubiertos. Dashboard para el cliente."],
+   ["Actualización en línea","Automatizar la ingesta con scripts programados o un pipeline. Publicar el resultado."],
+   ["Informe y defensa","Informe técnico y ejecutivo. Defensa ante el cliente. Publicación en GitHub con README en inglés."]],
+  unitsNote:"Son etapas del proyecto alineadas a CRISP-DM; el programa no define unidades.",
+  tech:[["Python, pandas, NumPy","Procesamiento","s"],["SciPy / statsmodels / scikit-learn","Inferencia y modelos","s"],["requests, BeautifulSoup, APIs REST","Obtención de datos","s"],["PostgreSQL / SQLite","Persistencia","s"],["Power BI / Streamlit / Dash","Entrega al cliente","s"],["GitHub Actions / cron / Airflow","Actualización en línea","s"],["Streamlit Cloud / Render / HF Spaces","Despliegue","o"],["GitHub Projects / Trello / Jira","Organización del equipo","s"]],
+  from:"Programación I, Inglés I, Proyecto Integrador, Base de Datos, Ética.", cross:"Todo el año: Ciencia de Datos, Estadísticas, Procesamiento, Gerencia de Proyectos, Testeo.", to:"Práctica Profesionalizante II.",
+  practice:["Elegir un problema con datos que se actualicen (precios, clima, transporte) para cubrir la actualización en línea.","Usar Gerencia de Proyectos y Testeo de Software del mismo cuatrimestre como insumo directo.","Documentar desde el primer día."],
+  practiceTitle:"Consejos",
+  official:"Espacio curricular destinado a posibilitar la integración y contrastación de los saberes transversales construidos en la formación de los otros espacios, garantizando la articulación teórico-práctica a través del acercamiento a situaciones reales de trabajo que requieren habilidades duras y blandas. Actividad formativa supervisada, de complejidad gradual y creciente, integrada al Proyecto Institucional de Prácticas Profesionalizantes. Las propuestas comprenderán el procesamiento de datos, la creación de modelos de las consideraciones de inferencia, de métricas de intereses, de post-procesamiento de las estructuras descubiertas, de la visualización y de la actualización en línea. Será muy importante poner en juego las capacidades referidas a la elaboración de informes y a la comunicabilidad de la información obtenida. Se planificarán entregas de las diferentes etapas, donde el docente se posiciona como cliente. Los proyectos formarán parte del portfolio de cada estudiante."},
+ {id:"gerencia-de-proyectos", n:17, name:"Gerencia de Proyectos", reg:"c2", campo:"Formación de Fundamento", hr:53, hs:5, ha:80, corr:"Ética (9), Tecnología y Sociedad (13)",
+  about:"Cómo planificar, financiar, ejecutar, controlar y cerrar un proyecto dentro de una organización. Suma calidad, riesgos laborales, ambiente y eficiencia energética, gestión de personas y el marco legal de la profesión.",
+  units:[["Fundamentos","Proyecto vs. operación. Triple restricción. Ciclo de vida. PMBOK, PRINCE2, Scrum, Kanban; predictivo vs. ágil."],
+   ["Planificación","Acta de constitución, alcance, EDT/WBS. Gantt, ruta crítica, PERT. Estimación. Matriz de riesgos."],
+   ["Financiamiento y evaluación","Presupuesto y costos. Fuentes de financiamiento. VAN, TIR, período de recupero, costo-beneficio."],
+   ["Seguimiento y control","Valor ganado (PV, EV, AC, SPI, CPI). Burndown. Gestión de cambios. Informes y lecciones aprendidas."],
+   ["Calidad, seguridad laboral y ambiente","ISO 9001, ISO/IEC 25010, IRAM. Ley 19.587 de Higiene y Seguridad. ISO 14001, ISO 50001, huella de carbono del cómputo."],
+   ["Organización y personas","Estructuras funcional, matricial y por proyectos. Matriz RACI. Trabajo en equipo, conflictos, liderazgo."],
+   ["Marco legal y responsabilidad social","Ejercicio legal de la profesión, contratos, normativa vigente. Compromiso social."]],
+  tech:[["Jira / Trello / GitHub Projects","Gestión ágil","s"],["MS Project / GanttProject / ProjectLibre","Gantt y ruta crítica","s"],["Notion / Confluence","Documentación","s"],["Excel / Google Sheets","Presupuesto, VAN/TIR, valor ganado","s"],["Slack / Teams / Discord","Comunicación","s"],["Miro / FigJam","Planificación colaborativa","o"]],
+  from:"Ética y Deontología, Tecnología y Sociedad.", cross:"Práctica Profesionalizante I (gestioná ese proyecto con esto), Ciencia de Datos.", to:"Práctica Profesionalizante II, Desarrollo de Sistemas de IA.",
+  practice:["Armar EDT, Gantt y ruta crítica del proyecto de la PP I.","Calcular VAN y TIR de una propuesta de proyecto de datos.","Llevar un tablero Scrum real durante el cuatrimestre."],
+  official:"La Gestión de Proyectos. Elementos de la gestión. Etapas y criterios para la planificación de proyectos. Financiamiento. Principios y estrategias de seguimiento y control de gestión. Evaluación de proyectos: técnicas y recursos. Análisis de resultados, elaboración de conclusiones e informes del proyecto. Gestión de Calidad: normativas locales y estándares internacionales. Prevención de Riesgos Laborales, condiciones y medio ambiente del trabajo: lineamientos para la elaboración de criterios de prevención y actuación. Cuidado del ambiente; eficiencia energética y uso racional de recursos naturales: criterios a tener en cuenta en el diseño y en el ciclo de vida del proyecto. La gestión de proyectos en las organizaciones. Organización. Tipos, estructura y organigrama. Gestión de Recursos Humanos. Trabajo colaborativo. Habilidades para el trabajo en equipo. Coordinación de tareas. Ejercicio legal de la profesión. Normativa vigente. Responsabilidad y compromiso social."},
+ {id:"testeo-de-software", n:18, name:"Testeo de Software", reg:"c2", campo:"Formación de Fundamento", hr:53, hs:5, ha:80, corr:"Programación I (1), Procesamiento de Datos (14)",
+  about:"Cómo asegurar que el software y los pipelines de datos funcionen: técnicas de prueba, pruebas unitarias, TDD, integración continua, automatización y la documentación formal de QA (plan de pruebas, casos, reportes de bugs, evidencias).",
+  units:[["Fundamentos del testing","Error, defecto, falla. Verificación vs. validación. Principios ISTQB. Niveles y pirámide de testing. Funcional, no funcional, regresión."],
+   ["Diseño de pruebas","Caja blanca: cobertura de sentencias, decisiones, caminos, complejidad ciclomática. Caja negra: particiones, valores límite, tablas de decisión."],
+   ["Pruebas unitarias","Patrón AAA. unittest y pytest: fixtures, parametrización. Testear excepciones. Mocks y stubs. Cobertura."],
+   ["TDD","Ciclo Red, Green, Refactor. Tests como documentación. Katas."],
+   ["Integración y automatización","Pruebas con base de datos y APIs. Validación de datos en pipelines. Automatización de UI y API. Integración continua."],
+   ["Seguridad de los sistemas","Análisis estático, dependencias vulnerables, DAST básico. Relación con OWASP."],
+   ["Documentación de QA","Plan de pruebas (IEEE 829 / ISO 29119), casos y diseño de casos. Reporte de bugs, logs, evidencias, reportes de herramientas."]],
+  tech:[["unittest (Python)","Pruebas unitarias","e"],["TDD y CI","Prácticas del programa","e"],["pytest, pytest-cov","Unitarias y cobertura","s"],["unittest.mock / pytest-mock","Dobles de prueba","s"],["GitHub Actions / GitLab CI","Integración continua","s"],["Selenium / Playwright","Automatización de UI","s"],["Postman / requests + pytest","Pruebas de API","s"],["Great Expectations / pandera","Testing de datos","s"],["Bandit, pip-audit, SonarQube","Seguridad y calidad","s"],["Jira / TestRail / GitHub Issues","Gestión de casos y bugs","s"]],
+  from:"Programación I, Procesamiento de Datos.", cross:"Ciberseguridad, Práctica Profesionalizante I.", to:"Desarrollo de Sistemas de IA.",
+  practice:["Kata TDD (FizzBuzz, calculadora de strings) con pytest.","Testear las funciones de limpieza del proyecto de PP I.","Configurar GitHub Actions para correr tests y cobertura en cada push.","Escribir un plan de pruebas y 3 reportes de bug formales."],
+  official:"Importancia del testeo. Técnicas. Herramientas. TDD, CI. Programación UnitTest. Técnicas de caja blanca. Desarrollo de casos de pruebas unitarias. Manejo de excepciones. Herramientas de automatización. Pruebas de integración. Seguridad de los sistemas de información. Documento de Plan de Pruebas, casos de pruebas, especificación de diseño de casos, logs de errores, reportes de errores (bugs), evidencias de pruebas, reportes emitidos por herramientas de pruebas."}
+];
+const REG = {anual:"Anual", c1:"1º cuatrimestre", c2:"2º cuatrimestre"};
+const RC = {anual:"var(--anual)", c1:"var(--c1)", c2:"var(--c2)"};
+const SRC = {e:["Programa","e"], s:["Sugerida","s"], o:["Opcional","o"]};
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function chip(s){
+  const b = document.createElement("button");
+  b.className = "chip " + s.reg; b.dataset.id = s.id;
+  b.innerHTML = `<span class="n">${s.n}</span><span class="name">${esc(s.name)}<span class="doc" data-doc="${s.id}"></span></span><span class="hs">${s.hs} hs/sem</span>`;
+  b.addEventListener("click", () => { location.hash = s.id; });
+  return b;
+}
+S.filter(s=>s.reg==="anual").forEach(s=>document.getElementById("anuales").append(chip(s)));
+S.filter(s=>s.reg==="c1").forEach(s=>document.getElementById("col1").append(chip(s)));
+S.filter(s=>s.reg==="c2").forEach(s=>document.getElementById("col2").append(chip(s)));
+
+function render(id){
+  const s = S.find(x=>x.id===id) || S[0];
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-current", c.dataset.id===s.id));
+  const sheet = document.getElementById("sheet");
+  sheet.style.setProperty("--rc", RC[s.reg]);
+  sheet.innerHTML = `
+    <div class="sheet-top">
+      <div class="eyebrow">Espacio ${s.n} · ${esc(s.campo)}</div>
+      <h2>${esc(s.name)}</h2>
+      <div class="meta">
+        <span class="pill reg">${REG[s.reg]}</span>
+        <span class="pill">${s.hr} hs reloj</span>
+        <span class="pill">${s.hs} hs cát/sem</span>
+        <span class="pill">${s.ha} hs cát/año</span>
+        <span class="pill">Correlativas: ${esc(s.corr)}</span>
+      </div>
+      <div class="teacher" id="teacher"></div>
+    </div>
+    <p class="about">${esc(s.about)}</p>
+    <div class="grid2">
+      <div class="block">
+        <h3>Unidades</h3>
+        <ol class="units">${s.units.map(u=>`<li><b>${esc(u[0])}</b><p>${esc(u[1])}</p></li>`).join("")}</ol>
+        <p class="note">${esc(s.unitsNote || "El programa no define unidades; esta organización es una propuesta a partir de los contenidos oficiales.")}</p>
+      </div>
+      <div class="block">
+        <h3>Tecnologías</h3>
+        ${s.techNote ? `<p class="note">${esc(s.techNote)}</p>` : ""}
+        <div class="tbl"><table><thead><tr><th>Herramienta</th><th>Uso</th><th>Origen</th></tr></thead><tbody>
+          ${s.tech.map(t=>`<tr><td>${esc(t[0])}</td><td>${esc(t[1])}</td><td><span class="src ${SRC[t[2]][1]}">${SRC[t[2]][0]}</span></td></tr>`).join("")}
+        </tbody></table></div>
+        <h3 style="margin-top:10px">Articulación</h3>
+        <div class="links">
+          <div><span>Viene de</span>${esc(s.from)}</div>
+          <div><span>Se cruza con</span>${esc(s.cross)}</div>
+          <div><span>Prepara para</span>${esc(s.to)}</div>
+        </div>
+        <h3 style="margin-top:10px">${esc(s.practiceTitle || "Práctica sugerida")}</h3>
+        <ul class="plain">${s.practice.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+      </div>
+    </div>
+    <details><summary>Contenidos mínimos del programa oficial</summary><p>${esc(s.official)}</p></details>`;
+  current = s.id; editing = false; renderTeacher();
+}
+
+// Teacher per subject, read from docentes.json in the repo (edit it on GitHub)
+const REPO_EDIT = "https://github.com/LucasJavierPerez/Ciencia-de-Datos-e-Inteligencia-Artificial-ITEC/edit/main/docentes.json";
+let dbState = "loading", current = null, editing = false;
+const DOC = {};
+function renderTeacher(){
+  const box = document.getElementById("teacher");
+  if (!box) return;
+  const d = DOC[current] || {};
+  const empty = dbState === "loading" ? "Cargando…" : "Sin cargar todavía";
+  box.innerHTML = `<div class="who"><span class="eyebrow">Docente</span>${d.nombre ? "<b></b><small></small>" : `<span class="empty">${empty}</span>`}</div>
+    <a class="btn" href="${REPO_EDIT}" target="_blank" rel="noopener">${d.nombre ? "Editar en GitHub" : "Agregar en GitHub"}</a>`;
+  if (d.nombre) { box.querySelector(".who b").textContent = d.nombre; box.querySelector(".who small").textContent = d.contacto || ""; }
+}
+function renderChipTeachers(){
+  document.querySelectorAll("[data-doc]").forEach(el => { el.textContent = (DOC[el.dataset.doc] || {}).nombre || ""; });
+}
+fetch("docentes.json", {cache: "no-store"})
+  .then(r => r.ok ? r.json() : {})
+  .catch(() => ({}))
+  .then(data => {
+    Object.entries(data || {}).forEach(([k, v]) => { if (v && (v.nombre || v.contacto)) DOC[k] = v; });
+    dbState = "ready"; renderChipTeachers(); renderTeacher();
+  });
+
+const PLAN = [
+ ["Año 1", 534, "257 anuales · 277 cuatrimestrales", [["a",1,"Programación I",107,5,160],["a",2,"Inglés I",43,2,64],["a",3,"Proyecto Integrador",107,5,160],["1",4,"Sistemas de Comunicación",32,3,48],["1",5,"Lógica",43,4,64],["1",6,"Análisis Matemático",53,5,80],["2",7,"Álgebra",53,5,80],["2",8,"Base de Datos",64,6,96],["2",9,"Ética y Deontología Profesional",32,3,48]]],
+ ["Año 2", 640, "257 anuales · 383 cuatrimestrales", [["a",10,"Ciencia de Datos",107,5,160],["a",11,"Inglés II",43,2,64],["a",12,"Estadísticas y Exploración de Datos",107,5,160],["1",13,"Tecnología y Sociedad",32,3,48],["1",14,"Procesamiento de Datos",64,6,96],["1",15,"Ciberseguridad",53,5,80],["2",16,"Práctica Profesionalizante I",128,12,192],["2",17,"Gerencia de Proyectos",53,5,80],["2",18,"Testeo de Software",53,5,80]]],
+ ["Año 3", 459, "todas del 1º cuatrimestre", [["1",19,"Procesamiento de Imágenes",64,6,96],["1",20,"Minería de Datos",64,6,96],["1",21,"Aprendizaje Automático",64,6,96],["1",22,"Técnicas de Procesamiento de Habla",64,6,96],["1",23,"Desarrollo de Sistemas de IA",75,7,112],["1",24,"Práctica Profesionalizante II",128,12,192]]]
+];
+const RL = {a:["Anual","reg-a"], "1":["1º cuatr.","reg-1"], "2":["2º cuatr.","reg-2"]};
+document.getElementById("plan").innerHTML = PLAN.map(([y,tot,det,rows]) => `
+  <details ${y==="Año 2"?"open":""}><summary>${y} · <span class="mono">${tot}</span> hs reloj</summary>
+  <div class="tbl"><table><thead><tr><th class="num">#</th><th>Régimen</th><th>Materia</th><th class="num">Hs reloj</th><th class="num">Hs cát/sem</th><th class="num">Hs cát/año</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr><td class="num">${r[1]}</td><td class="${RL[r[0]][1]}">${RL[r[0]][0]}</td><td>${esc(r[2])}</td><td class="num">${r[3]}</td><td class="num">${r[4]}</td><td class="num">${r[5]}</td></tr>`).join("")}
+  </tbody></table></div><p class="tot">${rows.length} espacios · ${tot} hs reloj (${det})</p></details>`).join("");
+</script>
+
+</body>
+</html>
